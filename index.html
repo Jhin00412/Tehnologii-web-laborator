@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Explorer</title>
+</head>
+<link rel="stylesheet" href="css/style.css">
+<body>
+
+    <header>
+        <h1>City Explorer</h1>
+
+        <nav>
+            <a href="#destinatii">Destinații</a>
+            <a href="#planifica">Planifică</a>
+            <a href="#recomandari">Recomandări</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="destinatii">
+            <h2>Destinații</h2>
+
+            <article>
+                <h3>Lisabona</h3>
+                <p><strong>Țara:</strong> Portugalia</p>
+                <p>
+                    Lisabona este un oraș colorat și vibrant, cunoscut pentru
+                    străduțele sale înguste, tramvaiele istorice și priveliștile
+                    asupra râului Tejo.
+                </p>
+                <p><strong>Durata recomandată:</strong> 4 zile</p>
+            </article>
+
+            <article>
+                <h3>Paris</h3>
+                <p><strong>Țara:</strong> Franța</p>
+                <p>
+                    Parisul este renumit pentru Turnul Eiffel, muzeele sale,
+                    arhitectura spectaculoasă și atmosfera romantică.
+                </p>
+                <p><strong>Durata recomandată:</strong> 5 zile</p>
+            </article>
+
+            <article>
+                <h3>Roma</h3>
+                <p><strong>Țara:</strong> Italia</p>
+                <p>
+                    Roma oferă o combinație impresionantă de istorie, artă,
+                    gastronomie și monumente antice, precum Colosseumul.
+                </p>
+                <p><strong>Durata recomandată:</strong> 4 zile</p>
+            </article>
+
+            <article>
+                <h3>Barcelona</h3>
+                <p><strong>Țara:</strong> Spania</p>
+                <p>
+                    Barcelona este un oraș mediteranean cunoscut pentru
+                    arhitectura lui Antoni Gaudí, plajele sale și atmosfera
+                    animată.
+                </p>
+                <p><strong>Durata recomandată:</strong> 4 zile</p>
+            </article>
+
+            <article>
+                <h3>Praga</h3>
+                <p><strong>Țara:</strong> Cehia</p>
+                <p>
+                    Praga impresionează prin centrul său istoric, Podul Carol,
+                    castelele și clădirile medievale bine conservate.
+                </p>
+                <p><strong>Durata recomandată:</strong> 3 zile</p>
+            </article>
+
+        </section>
+
+        <section id="planifica">
+            <h2>Planifică</h2>
+
+            <form>
+                <div>
+                    <label for="name">Nume</label>
+                    <input id="name" name="name" type="text">
+                </div>
+
+                <div>
+                    <label for="destination">Destinație</label>
+                    <select id="destination" name="destination">
+                        <option value="">Alege...</option>
+                        <option value="Lisabona">Lisabona</option>
+                        <option value="Paris">Paris</option>
+                        <option value="Roma">Roma</option>
+                        <option value="Barcelona">Barcelona</option>
+                        <option value="Praga">Praga</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="days">Număr de zile</label>
+                    <input id="days" name="days" type="number">
+                </div>
+
+                <button type="submit">Planifică excursia</button>
+            </form>
+        </section>
+
+        <section id="recomandari">
+            <h2>Recomandări</h2>
+
+            <ul>
+                <li>Verifică vremea și condițiile de călătorie înainte de plecare.</li>
+                <li>Vizitează principalele obiective turistice ale orașului.</li>
+                <li>Încearcă preparatele tradiționale locale.</li>
+                <li>Folosește transportul public pentru a descoperi mai ușor orașul.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Autor: Vasile Milete Justin</p>
+        <p>&copy; 2026 City Explorer</p>
+    </footer>
+
+</body>
+</html>
