@@ -12,7 +12,6 @@ createRoot(document.getElementById('root')).render(
 // ===== Laboratorul 2 =====
 console.log('L2 Merge!')
 
-// Ex
 
 import { destinatii } from './data/destinatii.js';
 
@@ -98,7 +97,7 @@ async function loadOrase() {
             oraseLungi.length
         );
 
-        const user = await fetchUserById(1);
+        const user = await fetchUserById(999);
 
         console.log(
             'L2 Ex. 3 - orașul utilizatorului 1:',
