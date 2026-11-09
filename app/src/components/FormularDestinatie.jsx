@@ -1,65 +1,85 @@
 import { useState } from 'react'
+import { valideaza } from '../utils/validareDestinatie.js'
 
-export default function FormularDestinatie({ onAdd }) {
-    const [oras, setOras] = useState('')
-    const [tara, setTara] = useState('')
-    const [zile, setZile] = useState('')
+export default function FormularDestinatie({ onAdd, seTrimite }) {
+    const [valori, setValori] = useState({ oras: '', tara: '', zile: '' })
+    const [erori, setErori] = useState({})
 
-    function handleSubmit(event) {
+    function handleChange(event) {
+        const { name, value } = event.target
+        setValori((valoriCurente) => ({ ...valoriCurente, [name]: value }))
+        setErori((eroriCurente) => ({ ...eroriCurente, [name]: '' }))
+    }
+
+    async function handleSubmit(event) {
         event.preventDefault()
 
-        const orasCompletat = oras.trim()
-        const taraCompletata = tara.trim()
-        const numarZile = Number(zile)
+        const eroriNoi = valideaza(valori)
+        setErori(eroriNoi)
 
-        if (
-            !orasCompletat ||
-            !taraCompletata ||
-            !Number.isInteger(numarZile) ||
-            numarZile < 1
-        ) {
-            return
-        }
+        if (Object.keys(eroriNoi).length > 0) return
 
-        onAdd({
+        const adaugata = await onAdd({
             id: crypto.randomUUID(),
-            oras: orasCompletat,
-            tara: taraCompletata,
-            zile: Number(zile),
+            oras: valori.oras.trim(),
+            tara: valori.tara.trim(),
+            zile: Number(valori.zile),
             vizitat: false
         })
 
-        setOras('')
-        setTara('')
-        setZile('')
+        if (adaugata) {
+            setValori({ oras: '', tara: '', zile: '' })
+            setErori({})
+        }
     }
 
     return (
-        <form className="formular" onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Oraș"
-                aria-label="Oraș"
-                value={oras}
-                onChange={(event) => setOras(event.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Țară"
-                aria-label="Țară"
-                value={tara}
-                onChange={(event) => setTara(event.target.value)}
-            />
-            <input
-                type="number"
-                placeholder="Zile"
-                aria-label="Zile"
-                min="1"
-                step="1"
-                value={zile}
-                onChange={(event) => setZile(event.target.value)}
-            />
-            <button type="submit">Adaugă</button>
+        <form className="formular" onSubmit={handleSubmit} noValidate>
+            <div className="camp">
+                <input
+                    type="text"
+                    name="oras"
+                    placeholder="Oraș"
+                    aria-label="Oraș"
+                    aria-invalid={Boolean(erori.oras)}
+                    value={valori.oras}
+                    onChange={handleChange}
+                    className={erori.oras ? 'invalid' : ''}
+                />
+                {erori.oras && <p className="eroare-camp">{erori.oras}</p>}
+            </div>
+            <div className="camp">
+                <input
+                    type="text"
+                    name="tara"
+                    placeholder="Țară"
+                    aria-label="Țară"
+                    aria-invalid={Boolean(erori.tara)}
+                    value={valori.tara}
+                    onChange={handleChange}
+                    className={erori.tara ? 'invalid' : ''}
+                />
+                {erori.tara && <p className="eroare-camp">{erori.tara}</p>}
+            </div>
+            <div className="camp">
+                <input
+                    type="number"
+                    name="zile"
+                    placeholder="Zile"
+                    aria-label="Zile"
+                    min="1"
+                    max="30"
+                    step="1"
+                    aria-invalid={Boolean(erori.zile)}
+                    value={valori.zile}
+                    onChange={handleChange}
+                    className={erori.zile ? 'invalid' : ''}
+                />
+                {erori.zile && <p className="eroare-camp">{erori.zile}</p>}
+            </div>
+            <button type="submit" disabled={seTrimite}>
+                {seTrimite ? 'Se trimite...' : 'Adaugă'}
+            </button>
         </form>
     )
 }

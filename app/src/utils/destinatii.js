@@ -31,3 +31,5 @@ export const adaugaDestinatie = (list, destinatie) =>
 export const stergeDestinatie = (list,id) => 
     list.filter((d) => d.id !== id);
 
+export const nr = (n, cuvant) =>
+    (n % 100 >= 20 ? `${n} de ${cuvant}` : `${n} ${cuvant}`)
