@@ -30,12 +30,17 @@ export default function App() {
 
                 if (!efectActiv) return
 
-                const pagini = Math.max(1, rezultat.pages)
-                setDestinatii(rezultat.data)
-                setTotalPagini(pagini)
+                if (Array.isArray(rezultat)) {
+                    setDestinatii(rezultat)
+                    setTotalPagini(1)
+                } else {
+                    const pagini = Math.max(1, rezultat.pages || 1)
+                    setDestinatii(rezultat.data || [])
+                    setTotalPagini(pagini)
 
-                if (pagina > pagini) {
-                    setPagina(pagini)
+                    if (pagina > pagini) {
+                        setPagina(pagini)
+                    }
                 }
             } catch (error) {
                 if (efectActiv) {
@@ -150,25 +155,27 @@ export default function App() {
                             Niciun rezultat pentru „{cautare.trim()}”.
                         </p>
                     )}
-                    <nav className="paginare" aria-label="Navigare între pagini">
-                        <button
-                            type="button"
-                            onClick={() => setPagina((paginaCurenta) => paginaCurenta - 1)}
-                            disabled={pagina === 1 || incarcare}
-                        >
-                            Înapoi
-                        </button>
-                        <span>
-                            pagina {pagina} din {totalPagini}
-                        </span>
-                        <button
-                            type="button"
-                            onClick={() => setPagina((paginaCurenta) => paginaCurenta + 1)}
-                            disabled={pagina === totalPagini || incarcare}
-                        >
-                            Înainte
-                        </button>
-                    </nav>
+                    {totalPagini > 1 && (
+                        <nav className="paginare" aria-label="Navigare între pagini">
+                            <button
+                                type="button"
+                                onClick={() => setPagina((paginaCurenta) => paginaCurenta - 1)}
+                                disabled={pagina === 1 || incarcare}
+                            >
+                                Înapoi
+                            </button>
+                            <span>
+                                pagina {pagina} din {totalPagini}
+                            </span>
+                            <button
+                                type="button"
+                                onClick={() => setPagina((paginaCurenta) => paginaCurenta + 1)}
+                                disabled={pagina === totalPagini || incarcare}
+                            >
+                                Înainte
+                            </button>
+                        </nav>
+                    )}
                 </>
             )}
         </main>

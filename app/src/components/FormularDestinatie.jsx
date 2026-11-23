@@ -17,7 +17,8 @@ export default function FormularDestinatie({ onAdd, seTrimite }) {
         const eroriNoi = valideaza(valori)
         setErori(eroriNoi)
 
-        if (Object.keys(eroriNoi).length > 0) return
+        // Permitem trimiterea pentru a declansa validarea 400 de pe server pentru laborator
+        // if (Object.keys(eroriNoi).length > 0) return
 
         const adaugata = await onAdd({
             id: crypto.randomUUID(),
